@@ -9,7 +9,12 @@ import Nav from "./../shared/Nav";
 import "./Budget.css";
 import { connect } from "react-redux";
 import { requestUserData } from "./../../ducks/userReducer";
-import { requestBudgetData } from "./../../ducks/budgetReducer";
+//IMPORT THE addPurchase AND removePurchase ACTION CREATORS
+import {
+  requestBudgetData,
+  addPurchase,
+  removePurchase,
+} from "./../../ducks/budgetReducer";
 
 class Budget extends Component {
   componentDidMount() {
@@ -18,7 +23,6 @@ class Budget extends Component {
   }
 
   render() {
-    // DESTRUCTURING VALUES HERE IS OPTIONAL BUT RECOMMENDED FOR CLEANER JSX
     const { loading, purchases, budgetLimit } = this.props.budget;
     const { firstName, lastName } = this.props.user;
     return (
@@ -28,8 +32,12 @@ class Budget extends Component {
           <Nav firstName={firstName} lastName={lastName} />
           <div className="content-container">
             <div className="purchases-container">
-              <AddPurchase />
-              <DisplayPurchases purchases={purchases} />
+              // USE PROPS TO PASS DOWN addPurchase AND removePurchase FUNCTIONS
+              <AddPurchase addPurchase={this.props.addPurchase} />
+              <DisplayPurchases
+                purchases={purchases}
+                removePurchase={this.props.removePurchase}
+              />
             </div>
             <div className="chart-container">
               <Chart1 purchases={purchases} budgetLimit={budgetLimit} />
@@ -49,7 +57,8 @@ function mapStateToProps(state) {
   };
 }
 
+// ADD addPurchase AND removePurchase TO THE 2ND OBJ ARG IN THE CONNECT METHOD
 export default connect(
   mapStateToProps,
-  { requestUserData, requestBudgetData }
+  { requestUserData, requestBudgetData, addPurchase, removePurchase }
 )(Budget);
