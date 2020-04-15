@@ -9,7 +9,6 @@ import Nav from "./../shared/Nav";
 import "./Budget.css";
 import { connect } from "react-redux";
 import { requestUserData } from "./../../ducks/userReducer";
-//IMPORT THE addPurchase AND removePurchase ACTION CREATORS
 import {
   requestBudgetData,
   addPurchase,
@@ -21,7 +20,6 @@ class Budget extends Component {
     this.props.requestUserData();
     this.props.requestBudgetData();
   }
-
   render() {
     const { loading, purchases, budgetLimit } = this.props.budget;
     const { firstName, lastName } = this.props.user;
