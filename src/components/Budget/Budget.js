@@ -49,15 +49,12 @@ class Budget extends Component {
     );
   }
 }
-
 function mapStateToProps(state) {
   return {
     budget: state.budget,
     user: state.user,
   };
 }
-
-// ADD addPurchase AND removePurchase TO THE 2ND OBJ ARG IN THE CONNECT METHOD
 export default connect(
   mapStateToProps,
   { requestUserData, requestBudgetData, addPurchase, removePurchase }
